@@ -94,7 +94,8 @@ begin
       'comissao "Comissão" ' +
     'FROM "MV"."EMPREGADOS" tEmpregados ' +
     'Left outer join "MV"."DEPARTAMENTOS" tDepto on tEmpregados.cod_departamento = tDepto.id_departamento ' +
-    'Left outer join "MV"."FUNCOES" tFunc on tEmpregados.cod_funcao = tFunc.id_funcao '
+    'Left outer join "MV"."FUNCOES" tFunc on tEmpregados.cod_funcao = tFunc.id_funcao '+
+    'Order by id_empregado '
     );
 
     FDConnection.Params := DBConnection.FDConnection1.Params;
