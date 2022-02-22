@@ -3367,7 +3367,6 @@ object frmMain: TfrmMain
     Padding.Right = 50
     TabOrder = 0
     StyleElements = []
-    ExplicitWidth = 776
     DesignSize = (
       818
       56)
@@ -3394,33 +3393,6 @@ object frmMain: TfrmMain
       OnMouseEnter = Hover
       OnMouseLeave = Hover
       ExplicitLeft = 343
-      ExplicitHeight = 57
-    end
-    object LBTNRelatorio: TLabel
-      Left = 350
-      Top = 0
-      Width = 150
-      Height = 56
-      Cursor = crHandPoint
-      Align = alLeft
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Relat'#243'rio'
-      Color = clMoneyGreen
-      Font.Charset = ANSI_CHARSET
-      Font.Color = 7229229
-      Font.Height = -16
-      Font.Name = 'Roboto'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = True
-      Layout = tlCenter
-      OnClick = LBTNRelatorioClick
-      OnMouseEnter = Hover
-      OnMouseLeave = Hover
-      ExplicitLeft = 448
-      ExplicitTop = 8
       ExplicitHeight = 57
     end
     object LBTNEmpregados: TLabel
@@ -3502,7 +3474,5 @@ object frmMain: TfrmMain
     Color = clWhite
     TabOrder = 1
     OnMouseEnter = pnlViewMouseEnter
-    ExplicitWidth = 835
-    ExplicitHeight = 460
   end
 end

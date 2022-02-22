@@ -84,15 +84,7 @@ begin
 
 end;
 
-function TfrmEmpregados.Moeda(AString: String): Currency;
-Var
-  valor : Currency ;
-begin
-  if not tryStrtoCurr(AString,valor) then
-    valor := 0.00;
 
-  Result := Valor;
-end;
 
 procedure TfrmEmpregados.LBTNExcluirClick(Sender: TObject);
 begin
@@ -121,18 +113,18 @@ begin
     objEmpregado.Nome := edtNome.Text;
     objEmpregado.DataAdmissao := dtEditAdmissao.Date;
     objEmpregado.Salario := Moeda(edtSalario.Text);
-    objEmpregado.Comissao := StrToCurrDef(edtComissao.Text,0);
+    objEmpregado.Comissao := Moeda(edtComissao.Text);
 
     if dblDepartamentos.Text <> EmptyStr  then
     Begin
-      objEmpregado.Departamento.Cod := dblDepartamentos.DataSource.DataSet.Fields[0].AsInteger;
-      objEmpregado.Departamento.Nome := dblDepartamentos.DataSource.DataSet.Fields[1].AsString;
+      objEmpregado.Departamento.Cod := objEmpregado.Departamento.FDQuery.FieldValues['Cod'];
+      objEmpregado.Departamento.Nome := objEmpregado.Departamento.FDQuery.FieldValues['Departamento'];
     End;
 
     if dblFuncao.Text <> EmptyStr then
     Begin
-      objEmpregado.Funcao.Cod := dblFuncao.ListSource.DataSet.Fields[0].AsInteger;
-      objEmpregado.Funcao.Funcao := dblFuncao.ListSource.DataSet.Fields[1].AsString;
+      objEmpregado.Funcao.Cod := objEmpregado.Funcao.FDQuery.FieldValues['Cod'];
+      objEmpregado.Funcao.Funcao := objEmpregado.Funcao.FDQuery.FieldValues['Função'];
     End;
 
   Except on E : Exception do
@@ -145,16 +137,14 @@ procedure TfrmEmpregados.dbgEmpregadosDblClick(Sender: TObject);
 Var
   nmDepartamento, nmFuncao : String;
 begin
-  nmDepartamento := VarToStr(objEmpregado.FDQuery.FieldValues['Departamento']);
-  nmFuncao := VarToStr(objEmpregado.FDQuery.FieldValues['Função']);
-
   edtCod.Text := objEmpregado.FDQuery.FieldValues['Cod'];
   edtNome.Text := objEmpregado.FDQuery.FieldValues['Nome'];
   dtEditAdmissao.Date := objEmpregado.FDQuery.FieldValues['Admissão'];
   edtSalario.Text := CurrToStrF(objEmpregado.FDQuery.FieldValues['Salário'],ffCurrency,2);
   edtComissao.Text := CurrToStrF(objEmpregado.FDQuery.FieldValues['Comissão'],ffCurrency,2);
-  dtsDepto.DataSet.Locate('Departamento',nmDepartamento,[]);
-  dtsFuncao.DataSet.Locate('Função',nmFuncao,[]);
+  dblDepartamentos.KeyValue := VarToStr(objEmpregado.FDQuery.FieldValues['Departamento']);
+  dblFuncao.KeyValue := VarToStr(objEmpregado.FDQuery.FieldValues['Função']);
+
 end;
 
 procedure TfrmEmpregados.Restart;
@@ -164,8 +154,9 @@ begin
   edtNome.Clear;
   edtSalario.Clear;
   edtComissao.Clear;
-  dblDepartamentos.ListFieldIndex := -1;
-  dblFuncao.ListFieldIndex := -1;
+  dblDepartamentos.KeyValue := -1;
+  dblFuncao.KeyValue := -1;
+  dtEditAdmissao.Date := Now;
 
   //Cria Objeto
   objEmpregado := TEmpregado.Create;
@@ -184,10 +175,26 @@ begin
   dblFuncao.KeyField := 'Função';
 
   //Configura largura das Colunas
-  dbgEmpregados.Columns.Items[1].Width := 400;
-  dbgEmpregados.Columns.Items[2].Width := 300;
+  dbgEmpregados.Columns.Items[0].Width := 50;
+  dbgEmpregados.Columns.Items[1].Width := 300;
+  dbgEmpregados.Columns.Items[2].Width := 200;
+  dbgEmpregados.Columns.Items[3].Width := 200;
+  dbgEmpregados.Columns.Items[4].Width := 100;
+  dbgEmpregados.Columns.Items[5].Width := 100;
+  dbgEmpregados.Columns.Items[6].Width := 100;
 
 end;
+
+function TfrmEmpregados.Moeda(AString: String): Currency;
+Var
+  valor : Currency ;
+begin
+  if not tryStrtoCurr(AString.Replace('R$ ','').Replace('.',''),valor) then
+    valor := 0.00;
+
+  Result := Valor;
+end;
+
 
 destructor TfrmEmpregados.Destroy;
 begin

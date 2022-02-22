@@ -86,8 +86,8 @@ begin
     xSql.Append(
     'SELECT  ' +
       'id_empregado "Cod", ' +
-      'tDepto.nm_departamento "Departamento", ' +
       'nm_empregado "Nome", ' +
+      'tDepto.nm_departamento "Departamento", ' +
       'tFunc.nm_funcao "Função", ' +
       'data_admissao "Admissão", ' +
       'salario "Salário", ' +

@@ -5,7 +5,7 @@
 -- Dumped from database version 13.0
 -- Dumped by pg_dump version 13.0
 
--- Started on 2022-02-22 03:32:48
+-- Started on 2022-02-22 13:29:00
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -113,6 +113,11 @@ COPY "MV"."DEPARTAMENTOS" (id_departamento, nm_departamento, nm_local) FROM stdi
 --
 
 COPY "MV"."EMPREGADOS" (id_empregado, cod_departamento, cod_funcao, nm_empregado, data_admissao, salario, comissao) FROM stdin;
+1	3	3	Alan Nascimento	2022-02-22	2000.00000	200.00000
+2	1	8	Eurico Pimenta	2019-01-01	2560.35000	700.00000
+3	3	4	Lucas Farias	2017-02-05	1800.00000	0.00000
+4	4	6	Anselmo Junior	2018-08-22	2000.00000	400.00000
+5	1	2	Fernando Luz	2010-02-22	2000.00000	400.00000
 \.
 
 
@@ -129,6 +134,9 @@ COPY "MV"."FUNCOES" (id_funcao, nm_funcao) FROM stdin;
 4	Auxiliar Contábil
 5	Suporte I
 6	Suporte II
+7	Desenvolvedor Junior
+8	Desenvolvedor Pleno
+9	Desenvolvedor Senior
 \.
 
 
@@ -138,7 +146,7 @@ COPY "MV"."FUNCOES" (id_funcao, nm_funcao) FROM stdin;
 -- Name: FUNCOES_id_funcao_seq; Type: SEQUENCE SET; Schema: MV; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"MV"."FUNCOES_id_funcao_seq"', 1, false);
+SELECT pg_catalog.setval('"MV"."FUNCOES_id_funcao_seq"', 1, true);
 
 
 --
@@ -186,7 +194,7 @@ ALTER TABLE ONLY "MV"."EMPREGADOS"
     ADD CONSTRAINT "FK_FUNCOES" FOREIGN KEY (cod_funcao) REFERENCES "MV"."FUNCOES"(id_funcao) NOT VALID;
 
 
--- Completed on 2022-02-22 03:32:48
+-- Completed on 2022-02-22 13:29:01
 
 --
 -- PostgreSQL database dump complete

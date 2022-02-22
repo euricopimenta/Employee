@@ -11,7 +11,6 @@ type
   TfrmMain = class(TForm)
     pnlHeader: TPanel;
     LBTNDepartamentos: TLabel;
-    LBTNRelatorio: TLabel;
     LBTNEmpregados: TLabel;
     pnlView: TPanel;
     Image1: TImage;

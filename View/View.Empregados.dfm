@@ -397,6 +397,7 @@ object frmEmpregados: TfrmEmpregados
       Width = 131
       Height = 25
       Cursor = crIBeam
+      Alignment = taRightJustify
       AutoSize = False
       BorderStyle = bsNone
       Color = 15856108
@@ -411,11 +412,12 @@ object frmEmpregados: TfrmEmpregados
       TabOrder = 6
     end
     object edtComissao: TEdit
-      Left = 650
+      Left = 659
       Top = 120
-      Width = 131
+      Width = 117
       Height = 25
       Cursor = crIBeam
+      Alignment = taRightJustify
       AutoSize = False
       BorderStyle = bsNone
       Color = 15856108
